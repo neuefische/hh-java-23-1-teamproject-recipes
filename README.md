@@ -1,1 +1,2 @@
-# hh-java-23-1-teamproject-recipes
+# Rezepte App
+Teamprojekt von Bolor, June, Lukas und Xin
