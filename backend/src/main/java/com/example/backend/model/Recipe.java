@@ -10,7 +10,6 @@ public record Recipe(
         List<String> ingredients,
         String preparation,
         String portion,
-
         Categories categories
 ) {
 
