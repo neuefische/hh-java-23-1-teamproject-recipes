@@ -9,7 +9,7 @@ import RecipeGallery from "./components/RecipeGallery";
 import {Recipe} from "./model/Recipe";
 
 function App() {
-    const [recipes, setRecipes] = useState<Recipe[]>([])
+    const [recipes] = useState<Recipe[]>([])
 
     return (
         <BrowserRouter>

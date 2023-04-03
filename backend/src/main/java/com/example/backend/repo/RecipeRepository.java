@@ -18,27 +18,4 @@ public class RecipeRepository {
         return new ArrayList<>(recipeList);
     }
 
-    public Recipe addRecipe(Recipe recipeToAdd) {
-        recipeList.add(recipeToAdd);
-        return recipeToAdd;
-    }
-/*
-    //Get Methode: To get a special recipe by id
-    public Recipe getRecipeById(String id) {
-    for(Recipe r: recipeList){
-        if (r.id().equals(id)) {
-
-        }
-    }
-}*/
-
-    //Add Methode: To add new recipe
-
-
-    //Update Methode: To Edit&Update of existed recipe
-
-
-    //Remove Methode: To delete a recipe by id
-
-
 }
