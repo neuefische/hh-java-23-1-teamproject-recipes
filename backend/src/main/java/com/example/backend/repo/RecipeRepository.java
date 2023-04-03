@@ -17,6 +17,11 @@ public class RecipeRepository {
     public List<Recipe> getAllRecipes() {
         return new ArrayList<>(recipeList);
     }
+
+    public Recipe addRecipe(Recipe recipeToAdd) {
+        recipeList.add(recipeToAdd);
+        return recipeToAdd;
+    }
 /*
     //Get Methode: To get a special recipe by id
     public Recipe getRecipeById(String id) {

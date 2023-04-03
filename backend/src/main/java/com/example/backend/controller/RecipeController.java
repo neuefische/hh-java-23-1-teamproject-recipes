@@ -24,9 +24,4 @@ public class RecipeController {
         return recipeService.getAllRecipes();
     }
 
-    @GetMapping("/test")
-    public String testMethode() {
-        return "Teststring";
-    }
-
 }

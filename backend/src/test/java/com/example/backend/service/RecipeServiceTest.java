@@ -1,33 +1,41 @@
 package com.example.backend.service;
 
 import com.example.backend.repo.RecipeRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
+@SpringBootTest
+@AutoConfigureMockMvc
 class RecipeServiceTest {
-    /*
-    MockMVC ist ein Test-Framework in der Spring-Entwicklung, das verwendet wird, um den Controller-Layer einer
-    Anwendung zu testen. Es ermöglicht das Schreiben von Integrationstests, bei denen ein Anfrage- und Antwortzyklus
-    simuliert wird, als ob er von einem echten Client gesendet und empfangen würde. Die MockMVC-Umgebung bietet eine
-    Vielzahl von Tools und Methoden, um den Spring MVC-Controller zu testen, einschließlich der Möglichkeit, HTTP-Anfragen
-    zu senden, die Antwortstatuscodes zu validieren und die empfangenen Daten zu prüfen. Die Verwendung von MockMVC ermöglicht
-    es Entwicklern, ihre REST-Endpoints zu testen, die korrekte Verarbeitung von Anfragen sicherzustellen und sicherzustellen,
-    dass der vom Endpunkt zurückgegebene Inhalt korrekt ist.
 
-     */
-    //Eingenschaft von Recipeservice-Test-Klasse
+    @Autowired
+    MockMvc mockMvc;
+
+    @Autowired
+    ObjectMapper objectMapper;
+
     private RecipeRepository recipeRepository = mock(RecipeRepository.class);
-    private RecipeService recipeService = new RecipeService(recipeRepository);
 
-    //Unit Test
-   /* @Test
-    void getAllRecipes() {
-        //GIVEN
-
-        //WHEN
-
-        //THEN
-    } */
+    @Test
+    void getAllRecipesReturnAllRecipes() throws Exception {
+        mockMvc.perform(get("/api/recipes"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(
+                        """
+                                []
+                                """
+                ));
+    }
 }
