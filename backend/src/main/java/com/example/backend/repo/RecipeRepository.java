@@ -1,6 +1,5 @@
 package com.example.backend.repo;
 
-import com.example.backend.model.Category;
 import com.example.backend.model.Recipe;
 import org.springframework.stereotype.Repository;
 
@@ -13,9 +12,6 @@ public class RecipeRepository {
 
     public RecipeRepository() {
         recipeList = new ArrayList<>();
-        recipeList.add(
-                new Recipe("123", "Tofu", Category.ASIAN)
-        );
     }
 
     public List<Recipe> getAllRecipes() {
