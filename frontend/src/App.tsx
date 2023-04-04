@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import './components/RecipeGallery';
 import './components/RecipeCard';
@@ -9,12 +8,25 @@ import RecipeGallery from "./components/RecipeGallery";
 import {Recipe} from "./model/Recipe";
 
 function App() {
-    const [recipes] = useState<Recipe[]>([])
+    const [recipes, setRecipes] = useState<Recipe[]>([])
+
+    function allRecipes() {
+        axios.get("/api/recipes")
+            .then((response => {
+                setRecipes(response.data)
+            }))
+            .catch(() => {
+                console.error()
+            })
+    }
+
+    useEffect(() => {
+        allRecipes()
+    }, [])
 
     return (
         <BrowserRouter>
             <div className="App">
-                <h1>Testhead</h1>
                 <Routes>
                     <Route path="/" element={<RecipeGallery recipes={recipes}/>}/>
                 </Routes>

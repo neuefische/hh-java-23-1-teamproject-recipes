@@ -7,9 +7,6 @@ type Props = {
 }
 
 export default function RecipeGallery(props: Props) {
-/*    const asianRecipes: Recipe[] = props.recipes.filter((recipe)=> recipe.categories === 'ASIAN')
-    const europeanRecipes: Recipe[] = props.recipes.filter((recipe)=> recipe.categories === 'EUROPEAN')
-    const mediterraRecipes: Recipe[] = props.recipes.filter((recipe)=> recipe.categories === 'MEDITERRANEAN')*/
     return(
     <div className='recipe-gallery'>
         <div>
