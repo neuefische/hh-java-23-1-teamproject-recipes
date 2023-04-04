@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
 import './App.css';
+import './components/RecipeGallery';
+import './components/RecipeCard';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import axios from "axios";
+import RecipeGallery from "./components/RecipeGallery";
+import {Recipe} from "./model/Recipe";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [recipes, setRecipes] = useState<Recipe[]>([])
+
+    function allRecipes() {
+        axios.get("/api/recipes")
+            .then((response => {
+                setRecipes(response.data)
+            }))
+            .catch(() => {
+                console.error()
+            })
+    }
+
+    useEffect(() => {
+        allRecipes()
+    }, [])
+
+    return (
+        <BrowserRouter>
+            <div className="App">
+                <Routes>
+                    <Route path="/" element={<RecipeGallery recipes={recipes}/>}/>
+                </Routes>
+
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;
