@@ -1,21 +1,7 @@
 package com.example.backend.repo;
 
 import com.example.backend.model.Recipe;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Repository
-public class RecipeRepository {
-    private final List<Recipe> recipeList;
-
-    public RecipeRepository() {
-        recipeList = new ArrayList<>();
-    }
-
-    public List<Recipe> getAllRecipes() {
-        return new ArrayList<>(recipeList);
-    }
-
+public interface RecipeRepository extends MongoRepository<Recipe, String> {
 }
