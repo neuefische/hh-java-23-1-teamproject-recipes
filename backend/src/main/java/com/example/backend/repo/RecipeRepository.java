@@ -18,4 +18,10 @@ public class RecipeRepository {
         return new ArrayList<>(recipeList);
     }
 
+
+    public Recipe addRecipe(Recipe recipe) {
+        recipeList.add(recipe);
+        return recipe;
+    }
+
 }
