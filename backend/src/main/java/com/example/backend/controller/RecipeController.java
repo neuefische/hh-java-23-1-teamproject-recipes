@@ -23,4 +23,10 @@ public class RecipeController {
         return recipeService.getAllRecipes();
     }
 
+    @PostMapping
+    Recipe addRecipe(@RequestBody Recipe recipe) {
+        return recipeService.addRecipe(recipe);
+    }
+
+
 }
