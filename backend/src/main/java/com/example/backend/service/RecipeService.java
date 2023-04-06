@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -19,6 +20,8 @@ public class RecipeService {
 
 
     public Recipe addRecipe(Recipe recipe) {
-        return recipeRepository.save(recipe);
+        String id = UUID.randomUUID().toString();
+        Recipe recipeToSave = recipe.withId(id);
+        return recipeRepository.save(recipeToSave);
     }
 }
