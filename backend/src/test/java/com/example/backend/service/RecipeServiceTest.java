@@ -16,14 +16,14 @@ class RecipeServiceTest {
     RecipeService recipeService = new RecipeService(recipeRepository);
 
     @Test
-    void getAllRecipes() {
+    void getAllRecipesReturnEmptyList() {
         // GIVEN
         List<Recipe> expected = Collections.emptyList();
         // WHEN
-        when(recipeRepository.getAllRecipes()).thenReturn(Collections.emptyList());
+        when(recipeRepository.findAll()).thenReturn(Collections.emptyList());
         List<Recipe> actual = recipeService.getAllRecipes();
         // THEN
-        verify(recipeRepository).getAllRecipes();
+        verify(recipeRepository).findAll();
         assertEquals(expected, actual);
     }
 }
