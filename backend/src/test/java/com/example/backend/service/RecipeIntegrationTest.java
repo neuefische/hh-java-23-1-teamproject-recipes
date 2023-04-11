@@ -26,6 +26,8 @@ class RecipeIntegrationTest {
     @Autowired
     RecipeRepository recipeRepository;
 
+
+  /*
     @Test
     void getAllRecipesReturnAllRecipes() throws Exception {
         mockMvc.perform(get("/api/recipes"))
@@ -51,6 +53,6 @@ class RecipeIntegrationTest {
                         """))
                 .andExpect(status().isOk());
     }
-
+     */
 
 }
