@@ -37,11 +37,15 @@ class RecipeIntegrationTest {
     void getAllRecipesReturnAllRecipes() throws Exception {
         mockMvc.perform(get("/api/recipes"))
                 .andExpect(status().isOk())
-                .andExpect(content().json(
-                        """
-                                []
-                                """
-                ));
+                .andExpect(content().json("""
+                        [
+                        {
+                            "id": "123",
+                            "name": "Test",
+                            "category": "ASIAN"
+                        }
+                        ]
+                         """));
     }
 
     @DirtiesContext
