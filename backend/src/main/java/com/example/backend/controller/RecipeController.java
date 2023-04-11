@@ -21,10 +21,14 @@ public class RecipeController {
         return recipeService.getAllRecipes();
     }
 
+    @GetMapping("/{id}")
+    public Recipe getRecipeById(@PathVariable String id){
+        return recipeService.getRecipeById(id);
+    }
+
     @PostMapping
     Recipe addRecipe(@RequestBody Recipe recipe) {
         return recipeService.addRecipe(recipe);
     }
-
 
 }
