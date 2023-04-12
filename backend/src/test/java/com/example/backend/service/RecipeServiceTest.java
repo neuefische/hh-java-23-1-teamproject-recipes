@@ -1,11 +1,14 @@
 package com.example.backend.service;
 
+import com.example.backend.model.Category;
 import com.example.backend.model.Recipe;
 import com.example.backend.repo.RecipeRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -25,5 +28,32 @@ class RecipeServiceTest {
         // THEN
         verify(recipeRepository).findAll();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void getRecipeById() {
+        // GIVEN
+        String id = "642ee1f918543010b981f729";
+        Recipe expected = new Recipe(
+                "642ee1f918543010b981f729",
+                "Tofu",
+                Category.ASIAN
+        );
+        // WHEN
+        when(recipeRepository.findById(id)).thenReturn(Optional.of(expected));
+        Recipe actual = recipeService.getRecipeById(id);
+        // THEN
+        verify(recipeRepository).findById(id);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getRecipeById_whenRecipeNotExist_thenReturnException() {
+        // GIVEN
+        String id = "123567";
+        // WHEN
+        when(recipeRepository.findById(id)).thenThrow(new NoSuchElementException("Recipe not found"));
+        // THEN
+        assertThrows(NoSuchElementException.class, () -> recipeService.getRecipeById(id));
     }
 }
