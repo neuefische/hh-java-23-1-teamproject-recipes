@@ -19,8 +19,7 @@ public class RecipeService {
 
 
     public Recipe addRecipe(Recipe recipe) {
-        String id = UUID.randomUUID().toString();
-        Recipe recipeToSave = recipe.withId(id);
+        Recipe recipeToSave = recipe.withId(recipe.id());
         return recipeRepository.save(recipeToSave);
     }
 }
