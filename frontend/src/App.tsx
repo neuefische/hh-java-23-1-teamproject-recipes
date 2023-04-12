@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
-import './components/RecipeGallery';
 import './components/RecipeCard';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import axios from "axios";
@@ -21,7 +20,7 @@ function App() {
             })
     }
 
-    function addRecipe(recipeToAdd: string ) {
+    function addRecipe(recipeToAdd: string) {
         const sendRecipe: NewRecipe = {
             name: recipeToAdd,
             category: "ASIAN"
@@ -45,11 +44,9 @@ function App() {
             <div className="App">
                 <Routes>
                     <Route path="/" element={<RecipeGallery recipes={recipes}/>}/>
-
                     <Route path='/recipes/add'
                            element={<AddRecipe addRecipe={addRecipe}/>}/>
                 </Routes>
-
             </div>
         </BrowserRouter>
     );

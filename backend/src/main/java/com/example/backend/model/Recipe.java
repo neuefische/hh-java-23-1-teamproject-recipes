@@ -2,7 +2,7 @@ package com.example.backend.model;
 
 public record Recipe(String id, String name, Category category) {
 
-    Recipe(String name, Category category) {
+    public Recipe(String name, Category category) {
         this(null, name, category);
     }
 
