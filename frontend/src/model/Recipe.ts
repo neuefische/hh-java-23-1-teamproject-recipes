@@ -3,3 +3,8 @@ export type Recipe = {
     name: string,
     category: "ASIAN" | "EUROPEAN" | "MEDITERRANEAN"
 }
+
+export type NewRecipe = {
+    name: string,
+    category: "ASIAN" | "EUROPEAN" | "MEDITERRANEAN"
+}
