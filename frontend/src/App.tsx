@@ -6,9 +6,14 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import axios from "axios";
 import RecipeGallery from "./components/RecipeGallery";
 import {Recipe} from "./model/Recipe";
+import LoginPage from "./components/LoginPage";
+import Header from "./components/Header";
+import useUser from "./components/useUser";
 
 function App() {
+    const { user, login } = useUser()
     const [recipes, setRecipes] = useState<Recipe[]>([])
+
 
     function allRecipes() {
         axios.get("/api/recipes")
@@ -26,9 +31,11 @@ function App() {
 
     return (
         <BrowserRouter>
+            <Header />
             <div className="App">
                 <Routes>
-                    <Route path="/" element={<RecipeGallery recipes={recipes}/>}/>
+                    <Route path="/login" element={<LoginPage onLogin={login} />}/>
+                    <Route path="/recipes" element={<RecipeGallery recipes={recipes}/>}/>
                 </Routes>
 
             </div>
