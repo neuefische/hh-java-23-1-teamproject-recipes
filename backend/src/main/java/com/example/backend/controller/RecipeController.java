@@ -3,11 +3,11 @@ package com.example.backend.controller;
 
 import com.example.backend.model.Recipe;
 import com.example.backend.service.RecipeService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -22,14 +22,17 @@ public class RecipeController {
         return recipeService.getAllRecipes();
     }
 
+    @PostMapping
+    Recipe addRecipe(@RequestBody Recipe recipe) {
+        return recipeService.addRecipe(recipe);
+    }
+
     @GetMapping("/{id}")
-    public Recipe getRecipeById(@PathVariable String id){
+    Optional<Recipe> getRecipeById(@PathVariable String id) {
         return recipeService.getRecipeById(id);
     }
 
-    @PostMapping
-    Recipe addRecipe(@RequestBody @Valid Recipe recipe) {
-        return recipeService.addRecipe(recipe);
-    }
+
+
 
 }
