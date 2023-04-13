@@ -53,10 +53,10 @@ class RecipeServiceTest {
         );
         // WHEN
         when(recipeRepository.findById(id)).thenReturn(Optional.of(expected));
-        Recipe actual = recipeService.getRecipeById(id);
+        Optional<Recipe> actual = recipeService.getRecipeById(id);
         // THEN
         verify(recipeRepository).findById(id);
-        assertEquals(expected, actual);
+        assertEquals(expected, actual.get());
     }
 
     @Test
