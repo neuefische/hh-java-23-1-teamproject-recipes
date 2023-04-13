@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Service
@@ -17,9 +18,13 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
-
     public Recipe addRecipe(Recipe recipe) {
         Recipe recipeToSave = recipe.withId(recipe.id());
         return recipeRepository.save(recipeToSave);
+    }
+
+    public Recipe getRecipeById(String id) {
+        return recipeRepository.findById(id)
+                .orElseThrow(NoSuchElementException::new);
     }
 }
