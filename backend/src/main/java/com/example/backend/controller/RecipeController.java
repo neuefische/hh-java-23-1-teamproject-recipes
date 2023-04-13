@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,6 +26,13 @@ public class RecipeController {
     Recipe addRecipe(@RequestBody Recipe recipe) {
         return recipeService.addRecipe(recipe);
     }
+
+    @GetMapping("/{id}")
+    Optional<Recipe> getRecipeById(@PathVariable String id) {
+        return recipeService.getRecipeById(id);
+    }
+
+
 
 
 }
