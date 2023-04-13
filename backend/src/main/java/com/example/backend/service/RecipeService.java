@@ -19,7 +19,8 @@ public class RecipeService {
     }
 
     public Recipe addRecipe(Recipe recipe) {
-        return recipeRepository.save(recipe);
+        Recipe recipeToSave = recipe.withId(recipe.id());
+        return recipeRepository.save(recipeToSave);
     }
 
     public Recipe getRecipeById(String id) {
