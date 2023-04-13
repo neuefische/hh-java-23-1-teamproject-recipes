@@ -11,6 +11,12 @@ export default function AddRecipe(props: AddRecipeProps) {
 
     function onSaveRecipe(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
+
+        if(name === undefined || name === '') {
+            console.error("Name required")
+            return
+        }
+
         props.addRecipe(name);
     }
 
