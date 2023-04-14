@@ -20,7 +20,7 @@ export default function TodoDetail() {
     }, [])
 
     function loadRecipeById(id: string) {
-        axios.get('/api/todo/' + id)
+        axios.get('/api/recipes/' + id)
             .then((response) => {
                 setRecipe(response.data)
             })
