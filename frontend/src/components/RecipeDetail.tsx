@@ -28,14 +28,15 @@ export default function TodoDetail() {
                 console.error("Recipe not found")
             })
     }
+
     return (
         <div>
             {
                 recipe
                     ? <div>
-                        <Typography>{recipe.id}</Typography>
-                        <Typography>{recipe.name}</Typography>
-                        <Typography>{recipe.category}</Typography>
+                        <p>{recipe.id}</p>
+                        <p>{recipe.name}</p>
+                        <p>{recipe.category}</p>
                     </div>
                     : <div>Loading...</div>
             }

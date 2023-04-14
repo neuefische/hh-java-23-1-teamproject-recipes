@@ -30,7 +30,7 @@ function App() {
             <div className="App">
                 <Routes>
                     <Route path="/" element={<RecipeGallery recipes={recipes}/>} />
-                    <Route path="/recipes/recipecard/:id" element={<RecipeDetail/>} />
+                    <Route path="/recipes/:id" element={<RecipeDetail/>} />
                 </Routes>
             </div>
         </BrowserRouter>
