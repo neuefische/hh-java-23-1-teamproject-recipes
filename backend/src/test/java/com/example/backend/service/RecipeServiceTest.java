@@ -1,9 +1,12 @@
 package com.example.backend.service;
 
 import com.example.backend.model.Category;
+import com.example.backend.model.MongoUser;
 import com.example.backend.model.Recipe;
+import com.example.backend.repo.MongoUserRepository;
 import com.example.backend.repo.RecipeRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +19,10 @@ import static org.mockito.Mockito.*;
 class RecipeServiceTest {
 
     RecipeRepository recipeRepository = mock(RecipeRepository.class);
+    MongoUserRepository mongoUserRepository = mock(MongoUserRepository.class);
     RecipeService recipeService = new RecipeService(recipeRepository);
+    MongoUserDetailsService mongoUserDetailsService = new MongoUserDetailsService(mongoUserRepository);
+
 
     @Test
     void getAllRecipesReturnEmptyList() {
@@ -29,7 +35,26 @@ class RecipeServiceTest {
         verify(recipeRepository).findAll();
         assertEquals(expected, actual);
     }
-    
+
+    @Test
+    void getMongoUserByName() {
+        // GIVEN
+        String username = "testUser";
+        String password = "1234";
+
+        MongoUser expected = new MongoUser(
+                "test1",
+                username, password
+        );
+        // WHEN
+        when(mongoUserRepository.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
+        UserDetails actual = mongoUserDetailsService.loadUserByUsername(username);
+        // THEN
+        verify(mongoUserRepository).findMongoUserByUsername(username);
+        assertEquals(expected.username(), actual.getUsername());
+    }
+
+
     @Test
     void addRecipe() {
         // GIVEN
@@ -53,10 +78,10 @@ class RecipeServiceTest {
         );
         // WHEN
         when(recipeRepository.findById(id)).thenReturn(Optional.of(expected));
-        Recipe actual = recipeService.getRecipeById(id);
+        Optional<Recipe> actual = recipeService.getRecipeById(id);
         // THEN
         verify(recipeRepository).findById(id);
-        assertEquals(expected, actual);
+        assertEquals(expected, actual.get());
     }
 
     @Test
