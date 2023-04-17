@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import {Recipe} from "../model/Recipe";
-import RecipeDetail from "./RecipeDetail";
 
 type Props = {
     recipe: Recipe
