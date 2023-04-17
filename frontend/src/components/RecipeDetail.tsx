@@ -1,12 +1,7 @@
-import React, {ReactNode, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import {Recipe} from "../model/Recipe";
-
-
-function Typography(props: { children: ReactNode }) {
-    return null;
-}
 
 export default function TodoDetail() {
 
@@ -24,8 +19,8 @@ export default function TodoDetail() {
             .then((response) => {
                 setRecipe(response.data)
             })
-            .catch((error) => {
-                console.error("Recipe not found")
+            .catch((r) => {
+                console.error("Recipe not found" + r)
             })
     }
 
