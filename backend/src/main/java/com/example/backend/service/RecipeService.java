@@ -24,5 +24,4 @@ public class RecipeService {
     public Recipe addRecipe(Recipe recipe) {
         return recipeRepository.save(recipe);
     }
-
 }
