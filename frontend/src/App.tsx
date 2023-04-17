@@ -4,6 +4,7 @@ import './components/RecipeCard';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import axios from "axios";
 import RecipeGallery from "./components/RecipeGallery";
+import RecipeDetail from './components/RecipeDetail';
 import LoginPage from "./components/LoginPage";
 import Header from "./components/Header";
 import useUser from "./components/useUser";
@@ -49,6 +50,8 @@ function App() {
             <Header />
             <div className="App">
                 <Routes>
+                    <Route path="/" element={<RecipeGallery recipes={recipes}/>} />
+                    <Route path="/recipes/:id" element={<RecipeDetail/>} />
                     <Route path="/login" element={<LoginPage onLogin={login} />}/>
                     <Route path="/recipes" element={<RecipeGallery recipes={recipes}/>}/>
                     <Route path='/recipes/add'
