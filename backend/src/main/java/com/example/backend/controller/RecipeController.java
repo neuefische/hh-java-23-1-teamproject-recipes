@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -29,7 +28,7 @@ public class RecipeController {
     }
 
     @GetMapping("/{id}")
-    Optional<Recipe> getRecipeById(@PathVariable String id) {
+    Recipe getRecipeById(@PathVariable String id) {
         return recipeService.getRecipeById(id);
     }
 }
