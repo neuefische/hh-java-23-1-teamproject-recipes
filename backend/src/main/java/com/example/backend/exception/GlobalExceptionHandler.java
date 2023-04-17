@@ -11,9 +11,9 @@ import java.util.NoSuchElementException;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<ApiError> handleNoSuchElementException (NoSuchElementException exception) {
-    ApiError apiError = new ApiError(exception.getMessage(), Instant.now());
+    public ResponseEntity<ApiError> handleNoSuchElementException(NoSuchElementException exception) {
+        ApiError apiError = new ApiError(exception.getMessage(), Instant.now());
 
-    return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
     }
 }
