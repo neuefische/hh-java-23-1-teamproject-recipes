@@ -54,7 +54,6 @@ class RecipeServiceTest {
         assertEquals(expected.username(), actual.getUsername());
     }
 
-
     @Test
     void addRecipe() {
         // GIVEN
@@ -78,10 +77,10 @@ class RecipeServiceTest {
         );
         // WHEN
         when(recipeRepository.findById(id)).thenReturn(Optional.of(expected));
-        Optional<Recipe> actual = recipeService.getRecipeById(id);
+        Recipe actual = recipeService.getRecipeById(id);
         // THEN
         verify(recipeRepository).findById(id);
-        assertEquals(expected, actual.get());
+        assertEquals(expected, actual);
     }
 
     @Test

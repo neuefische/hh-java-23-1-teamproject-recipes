@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -17,11 +18,12 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
+    public Recipe getRecipeById(String id) {
+        return recipeRepository.findById(id).orElseThrow();
+    }
+
     public Recipe addRecipe(Recipe recipe) {
         return recipeRepository.save(recipe);
     }
 
-    public Recipe getRecipeById(String id) {
-        return recipeRepository.findById(id).orElseThrow();
-    }
 }

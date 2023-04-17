@@ -1,6 +1,5 @@
 package com.example.backend.controller;
 
-
 import com.example.backend.model.Recipe;
 import com.example.backend.service.RecipeService;
 import jakarta.validation.Valid;
@@ -22,13 +21,13 @@ public class RecipeController {
         return recipeService.getAllRecipes();
     }
 
-    @PostMapping
-    Recipe addRecipe(@RequestBody @Valid Recipe recipe) {
-        return recipeService.addRecipe(recipe);
-    }
-
     @GetMapping("/{id}")
     Recipe getRecipeById(@PathVariable String id) {
         return recipeService.getRecipeById(id);
+    }
+
+    @PostMapping
+    Recipe addRecipe(@RequestBody @Valid Recipe recipe) {
+        return recipeService.addRecipe(recipe);
     }
 }
