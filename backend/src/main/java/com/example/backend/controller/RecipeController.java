@@ -30,5 +30,4 @@ public class RecipeController {
     Recipe addRecipe(@RequestBody @Valid Recipe recipe) {
         return recipeService.addRecipe(recipe);
     }
-
 }
