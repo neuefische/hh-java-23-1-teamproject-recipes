@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import useUser from "./components/useUser";
 import {NewRecipe, Recipe} from "./model/Recipe";
 import AddRecipe from "./components/AddRecipe";
+import UpdateRecipe from "./components/UpdateRecipe";
 
 function App() {
     const {login} = useUser()
