@@ -1,7 +1,7 @@
-import {FormEvent, useEffect, useState} from "react";
+import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import "./AddRecipe.css"
 import {Recipe} from "../model/Recipe";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 
 type UpdateRecipeProps = {
@@ -30,6 +30,7 @@ export default function UpdateRecipe(props: UpdateRecipeProps) {
             })
     }
 
+    const navigate = useNavigate();
     const [name, setName] = useState<string>("");
 
     function onSaveRecipe(event: FormEvent<HTMLFormElement>) {
@@ -37,20 +38,28 @@ export default function UpdateRecipe(props: UpdateRecipeProps) {
 
         if (id) {
             props.updateRecipe(recipe);
+            navigate("/recipes")
         }
     }
+
+    function onChange(event: ChangeEvent<HTMLInputElement>) {
+        const targetName: string = event.target.name;
+        const value: string = event.target.value;
+        if (id) {
+            setRecipe(
+                {...recipe, id: id, [targetName]: value}
+            )
+        }
+    }
+
 
     return (
         <div className="updateRecipe">
             <form onSubmit={onSaveRecipe}>
-                <input className="updateInput" type="text" name="name" placeholder={name} value={name}
-                       onChange={(event) => {
-                           setName(event.target.value)
-                       }}/>
-
+                <input className="updateInput" type="text" name="name" placeholder={recipe.name} value={recipe.name}
+                       onChange={onChange}/>
                 <button className="updateBtn">Update</button>
             </form>
-
         </div>
     )
 }
