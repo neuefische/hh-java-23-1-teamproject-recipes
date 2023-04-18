@@ -1,16 +1,25 @@
 import React from "react";
-import {Link, NavLink, Route, Routes} from "react-router-dom";
-import LoginPage from "./LoginPage";
-import ProtectedRoutes from "../ProtectedRoutes";
+import {Link, NavLink} from "react-router-dom";
 
-export default function Header(){
+type Props = {
+    user: string | undefined
+}
+export default function Header(props: Props) {
+    const authenticated = props.user !== undefined && props.user !== 'anonymousUser'
 
-    return(
+    return (
         <header className="header">
-            <h1 className="header_title">Daily Recipes</h1>
-            <Link className="headerLink" to='/recipes'>Recipes</Link>
-            <NavLink className="headerNav" to='/recipes/add'>Add Recipe</NavLink>
-            <NavLink className="headerNav" to='/login'>Login</NavLink>
+            <h1 className="header_title">Rezepte</h1>
+            <div>
+                {authenticated ? (
+                    <>
+                        <Link className="headerLink" to='/recipes'>All Recipes</Link>
+                        <Link className="headerNav" to='/recipes/add'>Add Recipe</Link>
+                    </>
+                ) : (
+                    <NavLink className="headerNav" to='/login'>Login</NavLink>
+                )}
+            </div>
 
         </header>
     )

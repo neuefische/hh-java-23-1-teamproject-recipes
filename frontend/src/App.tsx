@@ -16,7 +16,6 @@ function App() {
     const {user, login} = useUser()
     const [recipes, setRecipes] = useState<Recipe[]>([])
 
-
     function allRecipes() {
         axios.get("/api/recipes")
             .then((response => {
@@ -48,7 +47,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            <Header/>
+            <Header user={user}/>
             <div className="App">
                 <Routes>
                     <Route path="/login" element={<LoginPage onLogin={login}/>}/>
@@ -60,6 +59,7 @@ function App() {
                     <Route path='/recipes/add'
                            element={<AddRecipe addRecipe={addRecipe}/>}/>
                 </Routes>
+
             </div>
         </BrowserRouter>
     );
