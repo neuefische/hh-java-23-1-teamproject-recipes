@@ -71,6 +71,8 @@ function App() {
                     <Route path="/recipes" element={<RecipeGallery recipes={recipes}/>}/>
                     <Route path='/recipes/add'
                            element={<AddRecipe addRecipe={addRecipe}/>}/>
+                    <Route path='/recipes/update'
+                           element={<UpdateRecipe updateRecipe={updateRecipe}/>}/>
                 </Routes>
             </div>
         </BrowserRouter>
