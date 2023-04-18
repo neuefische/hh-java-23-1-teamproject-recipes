@@ -44,7 +44,7 @@ function App() {
 
 
     function updateRecipe(recipe: Recipe) {
-        axios.put(`/api/Recipe/${recipe.id}`, recipe)
+        axios.put(`/api/recipes/${recipe.id}`, recipe)
             .then((putRecipeResponse) => {
                 setRecipes(recipes.map(currentRecipe => {
                     if (currentRecipe.id === recipe.id) {
@@ -66,10 +66,10 @@ function App() {
             <Header/>
             <div className="App">
                 <Routes>
-                    <Route path="/" element={<RecipeGallery recipes={recipes}/>}/>
+                    <Route path="/" element={<RecipeGallery recipes={recipes} updateRecipe={updateRecipe}/>}/>
                     <Route path="/recipes/:id" element={<RecipeDetail/>}/>
                     <Route path="/login" element={<LoginPage onLogin={login}/>}/>
-                    <Route path="/recipes" element={<RecipeGallery recipes={recipes}/>}/>
+                    <Route path="/recipes" element={<RecipeGallery recipes={recipes} updateRecipe={updateRecipe}/>}/>
                     <Route path='/recipes/add'
                            element={<AddRecipe addRecipe={addRecipe}/>}/>
                     <Route path='/recipes/update/:id'
