@@ -5,11 +5,11 @@ import {useParams} from "react-router-dom";
 import axios from "axios";
 
 type UpdateRecipeProps = {
-    addRecipe: (newRecipe: Recipe | undefined) => void
+    updateRecipe: (newRecipe: Recipe) => void
 }
 export default function UpdateRecipe(props: UpdateRecipeProps) {
 
-    const initialState: Recipe = {id:"",name:"",category:"ASIAN"}
+    const initialState: Recipe = {id: "", name: "", category: "ASIAN"}
 
     const [recipe, setRecipe] = useState<Recipe>(initialState)
     const {id} = useParams<{ id: string }>()
@@ -25,27 +25,28 @@ export default function UpdateRecipe(props: UpdateRecipeProps) {
             .then((response) => {
                 setRecipe(response.data)
             })
-            .catch((r)=> {
+            .catch((r) => {
                 console.error("Recipe not found" + r)
             })
     }
+
     const [name, setName] = useState<string>("");
 
     function onSaveRecipe(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-         if(id){
-            props.addRecipe(recipe);
+        if (id) {
+            props.updateRecipe(recipe);
         }
-
     }
 
     return (
         <div className="updateRecipe">
             <form onSubmit={onSaveRecipe}>
-                <input className="updateInput" type="text" name="name" placeholder={name} value={name} onChange={(event) => {
-                    setName(event.target.value)
-                }}/>
+                <input className="updateInput" type="text" name="name" placeholder={name} value={name}
+                       onChange={(event) => {
+                           setName(event.target.value)
+                       }}/>
 
                 <button className="updateBtn">Update</button>
             </form>
