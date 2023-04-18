@@ -12,7 +12,7 @@ import {NewRecipe, Recipe} from "./model/Recipe";
 import AddRecipe from "./components/AddRecipe";
 
 function App() {
-    const { login } = useUser()
+    const {login} = useUser()
     const [recipes, setRecipes] = useState<Recipe[]>([])
 
 
@@ -43,17 +43,27 @@ function App() {
 
     useEffect(() => {
         allRecipes()
-    }, [])
+    }, []);
+
+
+    function deleteRecipe(id: string) {
+        axios.delete('/api/recipe' + id)
+            .then(() => {
+                setRecipes(recipes.filter((recipe) => recipe.id !== id))
+            })
+            .catch(console.error)
+    }
+
 
     return (
         <BrowserRouter>
-            <Header />
+            <Header/>
             <div className="App">
                 <Routes>
-                    <Route path="/" element={<RecipeGallery recipes={recipes}/>} />
-                    <Route path="/recipes/:id" element={<RecipeDetail/>} />
-                    <Route path="/login" element={<LoginPage onLogin={login} />}/>
-                    <Route path="/recipes" element={<RecipeGallery recipes={recipes}/>}/>
+                    <Route path="/" element={<RecipeGallery recipes={recipes} deleteRecipe={deleteRecipe}/>}/>
+                    <Route path="/recipes/:id" element={<RecipeDetail/>}/>
+                    <Route path="/login" element={<LoginPage onLogin={login}/>}/>
+                    <Route path="/recipes" element={<RecipeGallery recipes={recipes} deleteRecipe={deleteRecipe}/>}/>
                     <Route path='/recipes/add'
                            element={<AddRecipe addRecipe={addRecipe}/>}/>
                 </Routes>

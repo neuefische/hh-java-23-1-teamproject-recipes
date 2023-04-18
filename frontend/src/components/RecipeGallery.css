@@ -11,3 +11,15 @@
     padding: 50px;
     background: darkseagreen;
 }
+
+.recipe-gallery{
+    display: flex;
+    gap: 12px;
+    border: none;
+    margin: 12px;
+    justify-content: space-around;
+}
+
+.recipe-gallery_column {
+    border: 2px solid red;
+}

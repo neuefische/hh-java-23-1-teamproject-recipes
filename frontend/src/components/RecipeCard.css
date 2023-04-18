@@ -2,6 +2,10 @@
     border-radius: 10px;
     width: 280px;
     background: #add290;
+    margin: 12px;
+    padding: 10px;
+    color:  #A7F432 ;
+    border: #87FF2A 5px ridge;
 }
 
 .border-fine {
