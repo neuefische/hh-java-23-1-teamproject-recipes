@@ -10,11 +10,11 @@ import Header from "./components/Header";
 import useUser from "./components/useUser";
 import {NewRecipe, Recipe} from "./model/Recipe";
 import AddRecipe from "./components/AddRecipe";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 function App() {
-    const { login } = useUser()
+    const {user, login} = useUser()
     const [recipes, setRecipes] = useState<Recipe[]>([])
-
 
     function allRecipes() {
         axios.get("/api/recipes")
@@ -47,16 +47,19 @@ function App() {
 
     return (
         <BrowserRouter>
-            <Header />
+            <Header user={user}/>
             <div className="App">
                 <Routes>
-                    <Route path="/" element={<RecipeGallery recipes={recipes}/>} />
-                    <Route path="/recipes/:id" element={<RecipeDetail/>} />
-                    <Route path="/login" element={<LoginPage onLogin={login} />}/>
-                    <Route path="/recipes" element={<RecipeGallery recipes={recipes}/>}/>
+                    <Route path="/login" element={<LoginPage onLogin={login}/>}/>
+                    <Route element={<ProtectedRoutes user={user}/>}>
+                        <Route path="/" element={<RecipeGallery recipes={recipes}/>}/>
+                        <Route path="/recipes/:id" element={<RecipeDetail/>}/>
+                        <Route path="/recipes" element={<RecipeGallery recipes={recipes}/>}/>
+                    </Route>
                     <Route path='/recipes/add'
                            element={<AddRecipe addRecipe={addRecipe}/>}/>
                 </Routes>
+
             </div>
         </BrowserRouter>
     );
