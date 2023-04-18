@@ -47,7 +47,7 @@ function App() {
 
 
     function deleteRecipe(id: string) {
-        axios.delete('/api/recipe' + id)
+        axios.delete('/api/recipes/' + id)
             .then(() => {
                 setRecipes(recipes.filter((recipe) => recipe.id !== id))
             })

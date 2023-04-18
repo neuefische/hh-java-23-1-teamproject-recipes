@@ -24,7 +24,7 @@ export default function RecipeCard(props: Props) {
             }}>Detail
             </button>
 
-            {props.recipe.id === ' ' && <button className="deleteBtn" onClick={onDeleteClick}>Delete</button>}
+            <button className="deleteBtn" onClick={onDeleteClick}>Delete</button>
 
         </div>
     )
