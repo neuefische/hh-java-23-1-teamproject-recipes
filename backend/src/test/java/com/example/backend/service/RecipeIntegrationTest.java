@@ -3,6 +3,7 @@ package com.example.backend.service;
 import com.example.backend.model.Category;
 import com.example.backend.model.Recipe;
 import com.example.backend.repo.RecipeRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,15 @@ class RecipeIntegrationTest {
     @Autowired
     RecipeRepository recipeRepository;
 
+    @Autowired
+    ObjectMapper objectMapper;
+
+
     @BeforeEach
     void addRecipeToRepo() {
         recipeRepository.save(new Recipe("123", "Test", Category.ASIAN));
     }
+
 
     @Test
     @WithMockUser
@@ -100,5 +106,21 @@ class RecipeIntegrationTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/users/me"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("anonymousUser"));
+    }
+
+    @DirtiesContext
+    @Test
+    @WithMockUser
+    void expectSuccessfulDelete() throws Exception {
+
+        mockMvc.perform(delete("/api/recipes/123")
+                        .with(csrf()))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/recipes"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        []
+                        """));
     }
 }
