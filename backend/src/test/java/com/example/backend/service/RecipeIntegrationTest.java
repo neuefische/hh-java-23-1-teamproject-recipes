@@ -116,6 +116,22 @@ class RecipeIntegrationTest {
                                        """).with(csrf())).
                 andExpect(status().isOk());
     }
+    @Test
+    @DirtiesContext
+    @WithMockUser
+    void updateRecipeById_failed() throws Exception {
+        mockMvc.perform(put("/api/recipes/abcdef").
+                        contentType(MediaType.APPLICATION_JSON).
+                        content("""
+                                {
+                                "id": "123",
+                                "name": "Test",
+                                "category": "ASIAN"
+                                 }
+                                       """).with(csrf())).
+                andExpect(status().isBadRequest());
+    }
+
 
     @DirtiesContext
     @Test
