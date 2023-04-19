@@ -1,0 +1,22 @@
+.login_Form{
+    display: flex;
+    padding: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_Form input{
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #61dafb;
+}
+
+.loginBtn{
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #61dafb;
+    border: solid 3px black;
+    cursor: pointer;
+    background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, red);
+    animation:slidebg 2s linear infinite;
+}

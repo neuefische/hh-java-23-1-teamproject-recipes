@@ -42,6 +42,22 @@ function App() {
             })
     }
 
+    useEffect(() => {
+        allRecipes()
+    }, []);
+
+
+    function deleteRecipe(id: string) {
+        axios.delete('/api/recipes/' + id)
+            .then(() => {
+                setRecipes(recipes.filter((recipe) => recipe.id !== id))
+            })
+            .catch((r) => {
+                console.error(r)
+            })
+    }
+
+
     function updateRecipe(recipe: Recipe) {
         axios.put(`/api/recipes/${recipe.id}`, recipe)
             .then((putRecipeResponse) => {
@@ -56,19 +72,6 @@ function App() {
             .catch(console.error)
     }
 
-    useEffect(() => {
-        allRecipes()
-    }, []);
-
-    function deleteRecipe(id: string) {
-        axios.delete('/api/recipes/' + id)
-            .then(() => {
-                setRecipes(recipes.filter((recipe) => recipe.id !== id))
-            })
-            .catch((r) => {
-                console.error(r)
-            })
-    }
 
     return (
         <BrowserRouter>
@@ -78,7 +81,8 @@ function App() {
                     <Route path="/login" element={<LoginPage onLogin={login}/>}/>
                     <Route element={<ProtectedRoutes user={user}/>}>
                         <Route path="/recipes/:id" element={<RecipeDetail/>}/>
-                        <Route path="/recipes" element={<RecipeGallery recipes={recipes} deleteRecipe={deleteRecipe}
+                        <Route path="/recipes" element={<RecipeGallery recipes={recipes}
+                                                                       deleteRecipe={deleteRecipe}
                                                                        updateRecipe={updateRecipe}/>}/>
                     </Route>
                     <Route path='/recipes/update/:id'
@@ -86,6 +90,7 @@ function App() {
                     <Route path='/recipes/add'
                            element={<AddRecipe addRecipe={addRecipe}/>}/>
                 </Routes>
+
             </div>
         </BrowserRouter>
     );
