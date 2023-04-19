@@ -14,7 +14,7 @@ import UpdateRecipe from "./components/UpdateRecipe";
 import ProtectedRoutes from "./ProtectedRoutes";
 
 function App() {
-    const {user,login} = useUser()
+    const {user, login} = useUser()
     const [recipes, setRecipes] = useState<Recipe[]>([])
 
     function allRecipes() {
@@ -42,7 +42,6 @@ function App() {
             })
     }
 
-
     function updateRecipe(recipe: Recipe) {
         axios.put(`/api/recipes/${recipe.id}`, recipe)
             .then((putRecipeResponse) => {
@@ -61,37 +60,32 @@ function App() {
         allRecipes()
     }, []);
 
-
     function deleteRecipe(id: string) {
         axios.delete('/api/recipes/' + id)
             .then(() => {
                 setRecipes(recipes.filter((recipe) => recipe.id !== id))
             })
-            .catch((r)=>{console.error(r)})
+            .catch((r) => {
+                console.error(r)
+            })
     }
-
 
     return (
         <BrowserRouter>
             <Header user={user}/>
             <div className="App">
                 <Routes>
-                    <Route path="/" element={<RecipeGallery recipes={recipes} updateRecipe={updateRecipe}/>}/>
-                    <Route path="/recipes/:id" element={<RecipeDetail/>}/>
-                    <Route path="/login" element={<LoginPage onLogin={login}/>}/>
-                    <Route path="/recipes" element={<RecipeGallery recipes={recipes} updateRecipe={updateRecipe}/>}/>
                     <Route path="/login" element={<LoginPage onLogin={login}/>}/>
                     <Route element={<ProtectedRoutes user={user}/>}>
-                        <Route path="/" element={<RecipeGallery recipes={recipes} deleteRecipe={deleteRecipe}/>}/>
-                    <Route path="/recipes/:id" element={<RecipeDetail/>}/>
-                    <Route  path="/recipes" element={<RecipeGallery recipes={recipes} deleteRecipe={deleteRecipe}/>}/>
+                        <Route path="/recipes/:id" element={<RecipeDetail/>}/>
+                        <Route path="/recipes" element={<RecipeGallery recipes={recipes} deleteRecipe={deleteRecipe}
+                                                                       updateRecipe={updateRecipe}/>}/>
                     </Route>
-                    <Route path='/recipes/add'
-                           element={<AddRecipe addRecipe={addRecipe}/>}/>
                     <Route path='/recipes/update/:id'
                            element={<UpdateRecipe updateRecipe={updateRecipe}/>}/>
+                    <Route path='/recipes/add'
+                           element={<AddRecipe addRecipe={addRecipe}/>}/>
                 </Routes>
-
             </div>
         </BrowserRouter>
     );
