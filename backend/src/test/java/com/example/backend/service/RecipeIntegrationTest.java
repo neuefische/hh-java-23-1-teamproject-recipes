@@ -34,12 +34,10 @@ class RecipeIntegrationTest {
     @Autowired
     ObjectMapper objectMapper;
 
-
     @BeforeEach
     void addRecipeToRepo() {
         recipeRepository.save(new Recipe("123", "Test", Category.ASIAN));
     }
-
 
     @Test
     @WithMockUser
@@ -112,7 +110,6 @@ class RecipeIntegrationTest {
     @Test
     @WithMockUser
     void expectSuccessfulDelete() throws Exception {
-
         mockMvc.perform(delete("/api/recipes/123")
                         .with(csrf()))
                 .andExpect(status().isOk());

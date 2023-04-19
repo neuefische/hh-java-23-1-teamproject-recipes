@@ -28,8 +28,8 @@ class RecipeServiceTest {
     void getAllRecipesReturnEmptyList() {
         // GIVEN
         List<Recipe> expected = Collections.emptyList();
-        // WHEN
         when(recipeRepository.findAll()).thenReturn(Collections.emptyList());
+        // WHEN
         List<Recipe> actual = recipeService.getAllRecipes();
         // THEN
         verify(recipeRepository).findAll();
@@ -46,8 +46,8 @@ class RecipeServiceTest {
                 "test1",
                 username, password
         );
-        // WHEN
         when(mongoUserRepository.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
+        // WHEN
         UserDetails actual = mongoUserDetailsService.loadUserByUsername(username);
         // THEN
         verify(mongoUserRepository).findMongoUserByUsername(username);
@@ -58,8 +58,8 @@ class RecipeServiceTest {
     void addRecipe() {
         // GIVEN
         Recipe recipe = new Recipe("Gurke", Category.ASIAN);
-        // WHEN
         when(recipeRepository.save(recipe)).thenReturn(recipe);
+        // WHEN
         Recipe actual = recipeService.addRecipe(recipe);
         // THEN
         verify(recipeRepository).save(recipe);
@@ -75,8 +75,8 @@ class RecipeServiceTest {
                 "Tofu",
                 Category.ASIAN
         );
-        // WHEN
         when(recipeRepository.findById(id)).thenReturn(Optional.of(expected));
+        // WHEN
         Recipe actual = recipeService.getRecipeById(id);
         // THEN
         verify(recipeRepository).findById(id);
@@ -87,9 +87,19 @@ class RecipeServiceTest {
     void getRecipeById_whenRecipeNotExist_thenReturnException() {
         // GIVEN
         String id = "123567";
-        // WHEN
         when(recipeRepository.findById(id)).thenThrow(new NoSuchElementException());
+        // WHEN
         // THEN
         assertThrows(NoSuchElementException.class, () -> recipeService.getRecipeById(id));
+    }
+
+    @Test
+    void deleteRecipeById_verify() {
+        // GIVEN
+        String id = "123567";
+        // WHEN
+        recipeService.delete(id);
+        // THEN
+        verify(recipeRepository).deleteById(id);
     }
 }
