@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import useUser from "./components/useUser";
 import {NewRecipe, Recipe} from "./model/Recipe";
 import AddRecipe from "./components/AddRecipe";
+import UpdateRecipe from "./components/UpdateRecipe";
 import ProtectedRoutes from "./ProtectedRoutes";
 
 function App() {
@@ -51,7 +52,9 @@ function App() {
             .then(() => {
                 setRecipes(recipes.filter((recipe) => recipe.id !== id))
             })
-            .catch((r)=>{console.error(r)})
+            .catch((r) => {
+                console.error(r)
+            })
     }
 
 
@@ -62,10 +65,12 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<LoginPage onLogin={login}/>}/>
                     <Route element={<ProtectedRoutes user={user}/>}>
-                        {/*<Route path="/" element={<RecipeGallery recipes={recipes} deleteRecipe={deleteRecipe}/>}/>*/}
-                    <Route path="/recipes/:id" element={<RecipeDetail/>}/>
-                    <Route  path="/recipes" element={<RecipeGallery recipes={recipes} deleteRecipe={deleteRecipe}/>}/>
+                        <Route path="/recipes/:id" element={<RecipeDetail/>}/>
+                        <Route path="/recipes" element={<RecipeGallery recipes={recipes} deleteRecipe={deleteRecipe}
+                                                                       updateRecipe={updateRecipe}/>}/>
                     </Route>
+                    <Route path='/recipes/update/:id'
+                           element={<UpdateRecipe updateRecipe={updateRecipe}/>}/>
                     <Route path='/recipes/add'
                            element={<AddRecipe addRecipe={addRecipe}/>}/>
                 </Routes>
