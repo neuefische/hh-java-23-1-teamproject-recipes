@@ -3,7 +3,6 @@ package com.example.backend.service;
 import com.example.backend.model.Category;
 import com.example.backend.model.Recipe;
 import com.example.backend.repo.RecipeRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +28,6 @@ class RecipeIntegrationTest {
 
     @Autowired
     RecipeRepository recipeRepository;
-
-    @Autowired
-    ObjectMapper objectMapper;
 
     @BeforeEach
     void addRecipeToRepo() {

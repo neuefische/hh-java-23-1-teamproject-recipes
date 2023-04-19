@@ -51,7 +51,7 @@ function App() {
             .then(() => {
                 setRecipes(recipes.filter((recipe) => recipe.id !== id))
             })
-            .catch(console.error)
+            .catch((r)=>{console.error(r)})
     }
 
 
