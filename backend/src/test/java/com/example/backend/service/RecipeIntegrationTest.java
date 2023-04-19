@@ -16,8 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @SpringBootTest
@@ -116,6 +115,33 @@ class RecipeIntegrationTest {
                                  }
                                        """).with(csrf())).
                 andExpect(status().isOk());
+    }
+
+    @DirtiesContext
+    @Test
+    @WithMockUser
+    void expectSuccessfulDelete() throws Exception {
+        mockMvc.perform(delete("/api/recipes/123")
+                        .with(csrf()))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/recipes"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        []
+                        """));
+    }
+
+    @DirtiesContext
+    @Test
+    @WithMockUser
+    void catchesExceptionWhenRecipeNotFoundWithSpecificResponse() throws Exception {
+
+        mockMvc.perform(get("/api/recipes/999")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .with(csrf()))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("message").value("No value present"));
     }
 }
 

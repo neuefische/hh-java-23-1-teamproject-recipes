@@ -42,4 +42,8 @@ public class RecipeController {
     }
 
 
+    @DeleteMapping("{id}")
+    void delete(@PathVariable String id) {
+        recipeService.delete(id);
+    }
 }

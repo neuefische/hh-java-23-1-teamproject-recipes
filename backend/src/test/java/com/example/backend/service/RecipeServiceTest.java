@@ -28,8 +28,8 @@ class RecipeServiceTest {
     void getAllRecipesReturnEmptyList() {
 
         List<Recipe> expected = Collections.emptyList();
-
         when(recipeRepository.findAll()).thenReturn(Collections.emptyList());
+        // WHEN
         List<Recipe> actual = recipeService.getAllRecipes();
 
         verify(recipeRepository).findAll();
@@ -46,8 +46,8 @@ class RecipeServiceTest {
                 "test1",
                 username, password
         );
-
         when(mongoUserRepository.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
+        // WHEN
         UserDetails actual = mongoUserDetailsService.loadUserByUsername(username);
 
         verify(mongoUserRepository).findMongoUserByUsername(username);
@@ -58,8 +58,8 @@ class RecipeServiceTest {
     void addRecipe() {
 
         Recipe recipe = new Recipe("Gurke", Category.ASIAN);
-
         when(recipeRepository.save(recipe)).thenReturn(recipe);
+        // WHEN
         Recipe actual = recipeService.addRecipe(recipe);
 
         verify(recipeRepository).save(recipe);
@@ -75,8 +75,8 @@ class RecipeServiceTest {
                 "Tofu",
                 Category.ASIAN
         );
-
         when(recipeRepository.findById(id)).thenReturn(Optional.of(expected));
+        // WHEN
         Recipe actual = recipeService.getRecipeById(id);
 
         verify(recipeRepository).findById(id);
@@ -89,8 +89,20 @@ class RecipeServiceTest {
         String id = "123567";
 
         when(recipeRepository.findById(id)).thenThrow(new NoSuchElementException());
+        // WHEN
+        // THEN
 
         assertThrows(NoSuchElementException.class, () -> recipeService.getRecipeById(id));
+    }
+
+    @Test
+    void deleteRecipeById_verify() {
+        // GIVEN
+        String id = "123567";
+        // WHEN
+        recipeService.delete(id);
+        // THEN
+        verify(recipeRepository).deleteById(id);
     }
 
     @Test

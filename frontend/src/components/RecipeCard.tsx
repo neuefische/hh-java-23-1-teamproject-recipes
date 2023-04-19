@@ -3,11 +3,17 @@ import {Recipe} from "../model/Recipe";
 
 type Props = {
     updateRecipe: (recipe:Recipe) => void
-    recipe: Recipe
+    recipe: Recipe,
+    deleteRecipe: (id: string) => void
 }
 
 export default function RecipeCard(props: Props) {
     const navigate = useNavigate()
+
+    function onDeleteClick() {
+        props.deleteRecipe(props.recipe.id)
+    }
+
     return (
         <div className='recipe-card'>
 
@@ -22,6 +28,13 @@ export default function RecipeCard(props: Props) {
                 navigate('/recipes/update/' + props.recipe.id)
             }}>Update
             </button>
+            <button onClick={() => {
+                navigate('/recipes/' + props.recipe.id)
+            }}>Detail
+            </button>
+
+            <button className="deleteBtn" onClick={onDeleteClick}>Delete</button>
+
         </div>
     )
 }
