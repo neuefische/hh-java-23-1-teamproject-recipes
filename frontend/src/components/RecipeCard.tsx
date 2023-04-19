@@ -2,7 +2,7 @@ import {useNavigate} from "react-router-dom";
 import {Recipe} from "../model/Recipe";
 
 type Props = {
-    updateRecipe: (recipe:Recipe) => void
+    updateRecipe: (recipe: Recipe) => void
     recipe: Recipe,
     deleteRecipe: (id: string) => void
 }

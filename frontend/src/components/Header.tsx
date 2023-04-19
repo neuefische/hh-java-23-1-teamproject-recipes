@@ -12,12 +12,12 @@ export default function Header(props: Props) {
             <h1 className="header_title">Rezepte</h1>
             <div>
                 {authenticated ? (
-<>
+                    <>
                         <Link className="headerLink" to='/recipes'>All Recipes</Link>
                         <Link className="headerNav" to='/recipes/add'>Add Recipe</Link>
                     </>
                 ) : (
-            <NavLink className="headerNav" to='/login'>Login</NavLink>)}
+                    <NavLink className="headerNav" to='/login'>Login</NavLink>)}
             </div>
         </header>
     )

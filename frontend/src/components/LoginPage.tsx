@@ -11,16 +11,19 @@ export default function LoginPage(props: Props) {
     const [password, setPassword] = useState<string>("")
 
     const navigate = useNavigate()
+
     function onSubmit(event: FormEvent<HTMLFormElement>) {
-                event.preventDefault()
+        event.preventDefault()
 
         props.onLogin(username, password)
-            .then(() => {navigate("/recipes")})
+            .then(() => {
+                navigate("/recipes")
+            })
 
     }
 
 
-    return(
+    return (
         <form onSubmit={onSubmit}>
 
             <input value={username} placeholder="username" type="text" onChange={e => setUsername(e.target.value)}/>
