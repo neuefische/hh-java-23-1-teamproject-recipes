@@ -104,6 +104,21 @@ class RecipeIntegrationTest {
     @DirtiesContext
     @Test
     @WithMockUser
+    void expectSuccessfulDelete() throws Exception {
+        mockMvc.perform(delete("/api/recipes/123")
+                        .with(csrf()))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/recipes"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        []
+                        """));
+    }
+
+    @DirtiesContext
+    @Test
+    @WithMockUser
     void catchesExceptionWhenRecipeNotFoundWithSpecificResponse() throws Exception {
 
         mockMvc.perform(get("/api/recipes/999")

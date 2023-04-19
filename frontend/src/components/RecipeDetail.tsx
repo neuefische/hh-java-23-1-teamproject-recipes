@@ -25,7 +25,7 @@ export default function TodoDetail() {
     }
 
     return (
-        <div>
+        <div className="recipe-detail">
             {
                 recipe
                     ? <div>
@@ -35,7 +35,6 @@ export default function TodoDetail() {
                     </div>
                     : <div>Loading...</div>
             }
-
         </div>
     )
 }

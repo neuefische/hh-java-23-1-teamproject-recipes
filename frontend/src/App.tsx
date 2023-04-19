@@ -43,7 +43,17 @@ function App() {
 
     useEffect(() => {
         allRecipes()
-    }, [])
+    }, []);
+
+
+    function deleteRecipe(id: string) {
+        axios.delete('/api/recipes/' + id)
+            .then(() => {
+                setRecipes(recipes.filter((recipe) => recipe.id !== id))
+            })
+            .catch((r)=>{console.error(r)})
+    }
+
 
     return (
         <BrowserRouter>
@@ -52,9 +62,9 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<LoginPage onLogin={login}/>}/>
                     <Route element={<ProtectedRoutes user={user}/>}>
-                        <Route path="/" element={<RecipeGallery recipes={recipes}/>}/>
-                        <Route path="/recipes/:id" element={<RecipeDetail/>}/>
-                        <Route path="/recipes" element={<RecipeGallery recipes={recipes}/>}/>
+                        <Route path="/" element={<RecipeGallery recipes={recipes} deleteRecipe={deleteRecipe}/>}/>
+                    <Route path="/recipes/:id" element={<RecipeDetail/>}/>
+                    <Route  path="/recipes" element={<RecipeGallery recipes={recipes} deleteRecipe={deleteRecipe}/>}/>
                     </Route>
                     <Route path='/recipes/add'
                            element={<AddRecipe addRecipe={addRecipe}/>}/>
