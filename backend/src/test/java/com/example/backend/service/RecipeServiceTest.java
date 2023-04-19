@@ -26,19 +26,19 @@ class RecipeServiceTest {
 
     @Test
     void getAllRecipesReturnEmptyList() {
-        // GIVEN
+
         List<Recipe> expected = Collections.emptyList();
         when(recipeRepository.findAll()).thenReturn(Collections.emptyList());
         // WHEN
         List<Recipe> actual = recipeService.getAllRecipes();
-        // THEN
+
         verify(recipeRepository).findAll();
         assertEquals(expected, actual);
     }
 
     @Test
     void getMongoUserByName() {
-        // GIVEN
+
         String username = "testUser";
         String password = "1234";
 
@@ -49,26 +49,26 @@ class RecipeServiceTest {
         when(mongoUserRepository.findMongoUserByUsername(username)).thenReturn(Optional.of(expected));
         // WHEN
         UserDetails actual = mongoUserDetailsService.loadUserByUsername(username);
-        // THEN
+
         verify(mongoUserRepository).findMongoUserByUsername(username);
         assertEquals(expected.username(), actual.getUsername());
     }
 
     @Test
     void addRecipe() {
-        // GIVEN
+
         Recipe recipe = new Recipe("Gurke", Category.ASIAN);
         when(recipeRepository.save(recipe)).thenReturn(recipe);
         // WHEN
         Recipe actual = recipeService.addRecipe(recipe);
-        // THEN
+
         verify(recipeRepository).save(recipe);
         assertEquals(recipe, actual);
     }
 
     @Test
     void getRecipeById() {
-        // GIVEN
+
         String id = "642ee1f918543010b981f729";
         Recipe expected = new Recipe(
                 "642ee1f918543010b981f729",
@@ -78,18 +78,20 @@ class RecipeServiceTest {
         when(recipeRepository.findById(id)).thenReturn(Optional.of(expected));
         // WHEN
         Recipe actual = recipeService.getRecipeById(id);
-        // THEN
+
         verify(recipeRepository).findById(id);
         assertEquals(expected, actual);
     }
 
     @Test
     void getRecipeById_whenRecipeNotExist_thenReturnException() {
-        // GIVEN
+
         String id = "123567";
+
         when(recipeRepository.findById(id)).thenThrow(new NoSuchElementException());
         // WHEN
         // THEN
+
         assertThrows(NoSuchElementException.class, () -> recipeService.getRecipeById(id));
     }
 
@@ -102,4 +104,17 @@ class RecipeServiceTest {
         // THEN
         verify(recipeRepository).deleteById(id);
     }
+
+    @Test
+    void upRecipeById() {
+        String id = "123567";
+        Recipe recipe = new Recipe("Gurke", Category.MEDITERRANEAN);
+
+        when(recipeRepository.findById(id)).thenReturn(Optional.of(recipe));
+        recipeService.updateRecipe(recipe);
+
+        verify(recipeRepository).save(recipe);
+    }
+
+
 }

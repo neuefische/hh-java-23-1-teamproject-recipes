@@ -3,25 +3,22 @@ import RecipeCard from "./RecipeCard";
 
 
 type Props = {
-    recipes: Recipe[],
+    recipes: Recipe[]
+    updateRecipe: (recipe: Recipe) => void
     deleteRecipe: (id: string) => void
 }
 
 export default function RecipeGallery(props: Props) {
     return (
         <div className='recipe-gallery'>
-            <div className="recipe-gallery_column">
+            <div>
                 <h2>All Recipes</h2>
                 {
                     props.recipes.map((recipe) => <RecipeCard key={recipe.id}
-                                                              recipe={recipe}
-                                                              deleteRecipe={props.deleteRecipe}
-
-                    />)
+                                                              deleteRecipe={props.deleteRecipe} recipe={recipe}
+                                                              updateRecipe={props.updateRecipe}/>)
                 }
             </div>
-
-
         </div>
     )
 }

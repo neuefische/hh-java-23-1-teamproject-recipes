@@ -17,10 +17,8 @@ export default function Header(props: Props) {
                         <Link className="headerNav" to='/recipes/add'>Add Recipe</Link>
                     </>
                 ) : (
-                    <NavLink className="headerNav" to='/login'>Login</NavLink>
-                )}
+                    <NavLink className="headerNav" to='/login'>Login</NavLink>)}
             </div>
-
         </header>
     )
 }

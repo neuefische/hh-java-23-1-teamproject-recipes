@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom";
 import {Recipe} from "../model/Recipe";
 
 type Props = {
+    updateRecipe: (recipe: Recipe) => void
     recipe: Recipe,
     deleteRecipe: (id: string) => void
 }
@@ -19,6 +20,10 @@ export default function RecipeCard(props: Props) {
             <p>{props.recipe.id}</p>
             <p>{props.recipe.name}</p>
             <p>{props.recipe.category}</p>
+            <button onClick={() => {
+                navigate('/recipes/update/' + props.recipe.id)
+            }}>Update
+            </button>
             <button onClick={() => {
                 navigate('/recipes/' + props.recipe.id)
             }}>Detail
