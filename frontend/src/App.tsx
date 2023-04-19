@@ -58,6 +58,21 @@ function App() {
     }
 
 
+    function updateRecipe(recipe: Recipe) {
+        axios.put(`/api/recipes/${recipe.id}`, recipe)
+            .then((putRecipeResponse) => {
+                setRecipes(recipes.map(currentRecipe => {
+                    if (currentRecipe.id === recipe.id) {
+                        return putRecipeResponse.data
+                    } else {
+                        return currentRecipe
+                    }
+                }))
+            })
+            .catch(console.error)
+    }
+
+
     return (
         <BrowserRouter>
             <Header user={user}/>
@@ -66,7 +81,8 @@ function App() {
                     <Route path="/login" element={<LoginPage onLogin={login}/>}/>
                     <Route element={<ProtectedRoutes user={user}/>}>
                         <Route path="/recipes/:id" element={<RecipeDetail/>}/>
-                        <Route path="/recipes" element={<RecipeGallery recipes={recipes} deleteRecipe={deleteRecipe}
+                        <Route path="/recipes" element={<RecipeGallery recipes={recipes}
+                                                                       deleteRecipe={deleteRecipe}
                                                                        updateRecipe={updateRecipe}/>}/>
                     </Route>
                     <Route path='/recipes/update/:id'
