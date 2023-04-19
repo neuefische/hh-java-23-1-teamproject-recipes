@@ -1,4 +1,5 @@
 import {FormEvent, useState} from "react";
+import './Login.css';
 import {useNavigate} from "react-router-dom";
 
 
@@ -21,11 +22,11 @@ export default function LoginPage(props: Props) {
 
 
     return(
-        <form onSubmit={onSubmit}>
+        <form className="login_Form" onSubmit={onSubmit}>
 
             <input value={username} placeholder="username" type="text" onChange={e => setUsername(e.target.value)}/>
             <input value={password} placeholder="password" type="password" onChange={e => setPassword(e.target.value)}/>
-            <button type="submit">Login</button>
+            <button className="loginBtn" type="submit">Login</button>
 
         </form>
     )

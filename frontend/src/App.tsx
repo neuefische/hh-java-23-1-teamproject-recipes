@@ -62,7 +62,7 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<LoginPage onLogin={login}/>}/>
                     <Route element={<ProtectedRoutes user={user}/>}>
-                        <Route path="/" element={<RecipeGallery recipes={recipes} deleteRecipe={deleteRecipe}/>}/>
+                        {/*<Route path="/" element={<RecipeGallery recipes={recipes} deleteRecipe={deleteRecipe}/>}/>*/}
                     <Route path="/recipes/:id" element={<RecipeDetail/>}/>
                     <Route  path="/recipes" element={<RecipeGallery recipes={recipes} deleteRecipe={deleteRecipe}/>}/>
                     </Route>

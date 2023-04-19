@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import './RecipeDetail.css';
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import {Recipe} from "../model/Recipe";
@@ -28,7 +29,7 @@ export default function TodoDetail() {
         <div className="recipe-detail">
             {
                 recipe
-                    ? <div>
+                    ? <div className="detail-content">
                         <p>{recipe.id}</p>
                         <p>{recipe.name}</p>
                         <p>{recipe.category}</p>
