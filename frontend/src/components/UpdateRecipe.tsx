@@ -31,7 +31,7 @@ export default function UpdateRecipe(props: UpdateRecipeProps) {
     }
 
     const navigate = useNavigate();
-    const [name, setName] = useState<string>("");
+
 
     function onSaveRecipe(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -57,6 +57,8 @@ export default function UpdateRecipe(props: UpdateRecipeProps) {
         <div className="updateRecipe">
             <form onSubmit={onSaveRecipe}>
                 <input className="updateInput" type="text" name="name" placeholder={recipe.name} value={recipe.name}
+                       onChange={onChange}/>
+                <input className="updateInput" type="text" name="category" placeholder={recipe.category} value={recipe.category}
                        onChange={onChange}/>
                 <button className="updateBtn">Update</button>
             </form>
